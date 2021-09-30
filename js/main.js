@@ -52,10 +52,11 @@ function loadPage () {
 
         // Obtener la referencia del elemento body
         var body = document.querySelector(".tablero");
-
         // Crea un elemento <table> y un elemento <tbody>
         var tabla   = document.createElement("table");
         var tblBody = document.createElement("tbody");
+
+        document.querySelector(".title").classList.toggle("moveTitle");
 
         // Crea las celdas
         for (var i = 0; i < filas; i++) {

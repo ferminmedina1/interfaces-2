@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+.jugador{
+    display: none;
+    font-family: 'Secular One', sans-serif;
+    font-size: 149%;
+    flex-direction: column;
+    align-items: center;
+    width: 29%;
+    text-align: center;
+}
+
+.tablero{
+    width: 50%;
+    display: none;
+}
+
+
+table{
+    width: 100%;
+    padding: 4%;
+    border-radius: 4%;
+    background-color: black;
+}
+
+.ficha_jugador{
+    
+    margin-top: 17%;
+    width: 30%;
+
+}
+
+
+
+td{
+    border-radius: 100%;
+}
+
+
+.ficha {
+    padding: 0%;
+    width: 77%;
+    margin: 11%;
+    border-radius: 100%;
+}

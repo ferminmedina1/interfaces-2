@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+body{
+    background-image: url("../img/fondo.jpg");
+
+    background-size: cover;
+}
+header{
+    padding: 1% 2%;
+    display: flex;
+}
+
+
+h1{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 247%;
+}
+
+article{
+    display: flex;
+    justify-content: center;
+}
+
+section{
+    background-color: rgb(165 219 236);
+    padding: 4%;
+    margin-top: 1%;
+    display: flex;
+    width: 27%;
+    border-radius: 4%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.modoDeJuego{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 148%;
+}
+
+
+button{
+    font-size: 70%;
+    width: 59%;
+    padding: 5%;
+    margin: 4% 0%;
+    border-radius: 30% 6% 29% 6%;
+    border: 2px solid black;
+}
+
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(210 99 77);
+    border-radius: 6% 30% 6% 29%;
+    transition: all 0.5s ease-in-out;
+}
+
+
+.ocultarButtons{
+    display: none;
+}
+
+
+

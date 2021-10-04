@@ -22,11 +22,7 @@ h1{
     font-family: 'Bebas Neue', cursive;
     font-size: 247%;
     width: 100%;
-}
-
-.moveTitle{
-    transform: translate(44.5%,0);
-    transition: all 2s ease-in-out;
+    text-align: center;
 }
 
 article{
@@ -35,16 +31,17 @@ article{
 }
 
 section{
-    background-color: rgb(165 219 236);
+    background-color: #a5dbec;
     padding: 4%;
     display: flex;
-    width: 27%;
     border-radius: 4%;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
 }
 
-
+canvas{
+    margin: 30px;
+}
 
 
 .modoDeJuego{

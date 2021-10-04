@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/tablero.css">
-    <script src="js/main.js"></script>
     <title>4 en linea</title>
 </head>
 <body>
@@ -21,31 +20,47 @@
     
         <article>
             <section>
-                <div class="jugador">
-                    <p>Jugador 1</p>
-                    <img class="ficha_jugador" src="img/ficha_roja.png" alt="">
-                    <h4>0</h4>
+                <h1 class="turnos">Es el turno del jugador 1</h1>
+                <div class="table">
+                    <div class="jugador">
+                        <p>Jugador 1</p>
+                        <img class="ficha_jugador" src="img/ficha_roja.png" alt="">
+                        <h4>0</h4>
+                    </div>
+                    
+                    <section class="playroom">
+                        <div class="tablero">
+                            <canvas id="myCanvas" width="1000" height="500"></canvas>
+                        </div>
+                        <div class="opciones">
+                            <div class="modoDeJuego">
+                                <p>Seleccione el modo de juego:</p>
+                                <button value="4">4 en línea</button>
+                                <button value="6">6 en línea</button>
+                                <button value="7">7 en línea</button>
+                                <button value="8">8 en línea</button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="jugador">
+                        <p>Jugador 2</p>
+                        <img class="ficha_jugador" src="img/ficha_amarilla.png">
+                        <h4>0</h4>
+                    </div>
+                    
                 </div>
-
-                <div class="modoDeJuego">
-                    <p>Seleccione el modo de juego:</p>
-                        <button value="4">4 en línea</button>
-                        <button value="6">6 en línea</button>
-                        <button value="7">7 en línea</button>
-                        <button value="8">8 en línea</button>
-                </div>
-                <div class="tablero">
-                   
-                </div>
-
-                <div class="jugador">
-                    <p>Jugador 2</p>
-                    <img class="ficha_jugador" src="img/ficha_amarilla.png">
-                    <h4>0</h4>
-                </div>
-
             </section>
     </div>
+
+    <script src="./js/figure.js"></script>
+    <script src="./js/circle.js"></script>
+    <script src="./js/helper.js"></script>
+    <script src="./js/ficha.js"></script>
+    <script src="./js/juego.js"></script>
+    <script src="./js/table.js"></script>
+    <script src="./js/rect.js"></script>
+    <script src="./js/figuraCompuesta.js"></script>
 </body>
 
 </html>

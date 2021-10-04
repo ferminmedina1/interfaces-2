@@ -10,11 +10,20 @@
     text-align: center;
 }
 
-.tablero{
-    width: 50%;
-    display: none;
+.table{
+    display: flex;
 }
 
+.tablero{
+    display: none;
+    width: 100%;
+}
+
+.turnos{
+    display: none;
+    justify-content: center;
+    margin: 0;
+}
 
 table{
     width: 100%;

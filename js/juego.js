@@ -1,7 +1,7 @@
 'use strict'
 let c = document.querySelector('#myCanvas');
 let ctx = c.getContext("2d"); 
-
+ 
 //valores de juego.. dimensiones de tablero y cantidad de fichas
 
 let juegoGanado = false;//marcador de fin de juego

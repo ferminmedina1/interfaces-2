@@ -11,21 +11,24 @@
     <link rel="stylesheet" href="css/tablero.css">
     <title>4 en linea</title>
 </head>
-<body>
-
+<body >
+    
     <div class="container">
         <header>
-                <h1 class="title">Cuatro en línea</h1>
+                <h1 class="title">¡hola!</h1>
         </header>
     
         <article>
             <section>
                 <h1 class="turnos">Es el turno del jugador 1</h1>
+                <div class="cronometro">
+                    <span>Tiempo restante de partida: </span><span id="minutos"> 03</span>:<span id="segundos">60</span>
+                </div>
                 <div class="table">
                     <div class="jugador">
                         <p>Jugador 1</p>
-                        <img class="ficha_jugador" src="img/ficha_roja.png" alt="">
-                        <h4>0</h4>
+                        <img class="ficha_jugador" src="img/ficha_roja.png">
+                        <h4 id="player1">0</h4>
                     </div>
                     
                     <section class="playroom">
@@ -46,9 +49,21 @@
                     <div class="jugador">
                         <p>Jugador 2</p>
                         <img class="ficha_jugador" src="img/ficha_amarilla.png">
-                        <h4>0</h4>
+                        <h4 id="player2">0</h4>
                     </div>
                     
+                </div>
+
+                <div class="btnContinuarReiniciar">
+
+                    <div class="continuar">
+                        <input type="button" id="btnContinuar" value="Continuar partida"> 
+                    </div>
+                    
+                    <div class="reiniciar">
+                        <input type="button" id="btnReiniciar" value="Reiniciar partida">  
+                    </div>
+
                 </div>
             </section>
     </div>
@@ -61,6 +76,7 @@
     <script src="./js/table.js"></script>
     <script src="./js/rect.js"></script>
     <script src="./js/figuraCompuesta.js"></script>
+    
 </body>
 
 </html>

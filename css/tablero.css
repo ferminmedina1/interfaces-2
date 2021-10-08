@@ -24,6 +24,7 @@
     display: none;
     justify-content: center;
     margin: 0;
+    margin-right: 10%;
 }
 
 table{
@@ -91,4 +92,20 @@ td{
     font-size: 170%;
     justify-content: center;
     font-family: 'Bebas Neue', cursive;
+}
+
+a{
+    text-decoration: none;
+}
+
+.btnVolveryTurnos{
+    display: flex;
+    flex-direction: row;
+}
+
+#volver{
+    width: 88%;
+    font-size: 105%;
+    padding: 7%;
+    display: none;
 }

@@ -104,6 +104,7 @@ function reloj(){
             document.querySelector(".modoDeJuego").classList.add("ocultarButtons");
             document.querySelector(".turnos").style.display = "flex";
             document.querySelector(".cronometro").style.display = "flex"
+            document.querySelector("#volver").style.display = "flex"
 
             for(let j=0; j < divJugador.length; j++) {
                 divJugador[j].style.display = "flex";
@@ -145,7 +146,7 @@ function setTablero(){  //setea el tablero
           dimX = 7
           cantWin = 4
           inicX = 290
-          minutos =1;
+          minutos = 4;
       }
 
       else if (modoDeJuego == 6){

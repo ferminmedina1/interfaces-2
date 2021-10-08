@@ -1,8 +1,3 @@
-// let canvas = document.querySelector('#myCanvas');
-// let ctx = canvas.getContext("2d"); 
-//dibujando el tablero
-//#region Valores de tablero
-
 let inicX;
 let inicY;
 let dimX;
@@ -19,7 +14,8 @@ let ultimoColor = colorDos;
 let modoDeJuego;
 let fichasJugador = null;
 let tamFicha = null;
-//#endregion
+let fichaImg1 = null;
+let fichaImg2 = null;
 let juegoIniciado = false;
 let continuaPartida = false;
 let ptsJ1 = 0;
@@ -102,20 +98,24 @@ function reloj(){
     
             modoDeJuego = botones[i].value;
             document.querySelector(".modoDeJuego").classList.add("ocultarButtons");
-            document.querySelector(".turnos").style.display = "flex";
-            document.querySelector(".cronometro").style.display = "flex"
-            document.querySelector("#volver").style.display = "flex"
+            document.querySelector(".cambiarFichas").classList.add("ocultarButtons");
+
+            let nodeList = document.querySelectorAll(".change");
+            nodeList.forEach(element => {
+              element.style.display = "flex";
+            });
 
             for(let j=0; j < divJugador.length; j++) {
                 divJugador[j].style.display = "flex";
                 document.querySelector(".tablero").style.display = "flex";
-                
             }
             setTablero();
             juegoIniciado = true;
             juegoGanado = false;
             dibujarFichas();
             reloj()
+            document.getElementById("player1img").src = fichaImg1;
+            document.getElementById("player2img").src = fichaImg2;
         })
     }
 }
@@ -226,12 +226,48 @@ function dibujarFichas(){
     drawFigures();
 }
 
+let imgInput = document.getElementById('Ficha1');
+   
+imgInput.addEventListener('change', function(e) {
+    if(e.target.files) {
+        let imageFile = e.target.files[0];  //aca obtenemos el archivo
+        let reader = new FileReader();
+        reader.readAsDataURL(imageFile);
+        reader.onloadend = function (e) {
+            let myImage = new Image();      //crea la imagen
+            myImage.src = e.target.result; 
+            myImage.onload = function() {
+              fichaImg1 = myImage.src;
+      }
+      }
+    }
+});
+
+let imgInput2 = document.getElementById('Ficha2');
+
+imgInput2.addEventListener('change', function(e) {
+  if(e.target.files) {
+      let imageFile = e.target.files[0];  //aca obtenemos el archivo
+      let reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onloadend = function (e) {
+          let myImage = new Image();      //crea la imagen
+          myImage.src = e.target.result; 
+          myImage.onload = function() {
+            fichaImg2 = myImage.src;
+    }
+    }
+  }
+});
+
 function addFichaR(X,Y,color){ //podriamos agregar un parametro para cargar una imagen...
   let posX =  X//Math.round(Math.random() * X);
   let posY = Y //+ Math.round(Math.random() * (canvasHeight - Y)); //se crea aleatoriamente en el canvas
   let radio = tamFicha;
-  let dir= "img/ficha_roja.png";
-  let ficha = new Ficha(posX,posY,color,radio,ctx,dir); //Creamos el objeto ficha con sus respectivos parametros y lo retornamos
+  if(fichaImg1 == null){
+      fichaImg1= "img/ficha_roja.png";
+  }
+  let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg1); //Creamos el objeto ficha con sus respectivos parametros y lo retornamos
   return ficha;
 }
 
@@ -239,8 +275,10 @@ function addFichaA(X,Y,color){
   let posX = X; //se crea pero del otro lado!
   let posY = Y //+ Math.round(Math.random() * (canvasHeight - Y));
   let radio = tamFicha;
-  let dir= "img/ficha_amarilla.png";
-  let ficha = new Ficha(posX,posY,color,radio,ctx,dir);
+  if(fichaImg2 == null){
+    fichaImg2= "img/ficha_amarilla.png";
+  }
+  let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg2);
   return ficha;
 }
 

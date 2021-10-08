@@ -89,5 +89,5 @@ button:hover, #btnReiniciar:hover, #btnContinuar:hover{
 
 .ocultarButtons{
     display: none;
-    
+    width: 100%;
 }

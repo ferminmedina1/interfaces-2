@@ -21,64 +21,70 @@
         <article>
             <section>
                 <div class="btnVolveryTurnos">
-                <a href="index.html"><button id="volver">Elegir modo de juego</button></a>
-                <h1 class="turnos">Es el turno del jugador 1</h1>
+                <a href="index.html"><button class="change">Elegir modo de juego</button></a>
+                <h1 class="turnos change">Es el turno del jugador 1</h1>
             </div>
-                <div class="cronometro">
-                    <span>Tiempo restante de partida: </span><span id="minutos"></span>:<span id="segundos"></span>
+            <div class="cronometro change">
+                <p>Tiempo restante de partida: </p> <span id="minutos"> </span>:<span id="segundos"></span>
+            </div>
+            <div class="table">
+                <div class="jugador">
+                    <p>Jugador 1</p>
+                    <img class="ficha_jugador" src="img/ficha_roja.png" id="player1img">
+                    <h4 id="player1">0</h4>
                 </div>
-                <div class="table">
-                    <div class="jugador">
-                        <p>Jugador 1</p>
-                        <img class="ficha_jugador" src="img/ficha_roja.png">
-                        <h4 id="player1">0</h4>
+                
+                <section class="playroom">
+                    <div class="tablero">
+                        <canvas id="myCanvas" width="1000" height="500"></canvas>
                     </div>
-                    
-                    <section class="playroom">
-                        <div class="tablero">
-                            <canvas id="myCanvas" width="1000" height="500"></canvas>
+                    <div class="opciones">
+                        <div class="modoDeJuego">
+                            <p>Seleccione el modo de juego:</p>
+                            <button value="4">4 en línea</button>
+                            <button value="6">6 en línea</button>
+                            <button value="7">7 en línea</button>
+                            <button value="8">8 en línea</button>
                         </div>
-                        <div class="opciones">
-                            <div class="modoDeJuego">
-                                <p>Seleccione el modo de juego:</p>
-                                <button value="4">4 en línea</button>
-                                <button value="6">6 en línea</button>
-                                <button value="7">7 en línea</button>
-                                <button value="8">8 en línea</button>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <div class="jugador">
-                        <p>Jugador 2</p>
-                        <img class="ficha_jugador" src="img/ficha_amarilla.png">
-                        <h4 id="player2">0</h4>
                     </div>
-                    
+                </section>
+                
+                <div class="jugador">
+                    <p>Jugador 2</p>
+                    <img class="ficha_jugador" src="img/ficha_amarilla.png" id="player2img">
+                    <h4 id="player2">0</h4>
                 </div>
-
-                <div class="btnContinuarReiniciar">
-
-                    <div class="continuar">
-                        <input type="button" id="btnContinuar" value="Continuar partida"> 
-                    </div>
-                    
-                    <div class="reiniciar">
-                        <input type="button" id="btnReiniciar" value="Reiniciar partida">  
-                    </div>
-
+                
+            </div>
+            
+            <div class="btnContinuarReiniciar">
+                
+                <div class="continuar">
+                    <input type="button" id="btnContinuar" value="Continuar partida"> 
                 </div>
-            </section>
+                
+                <div class="reiniciar">
+                    <input type="button" id="btnReiniciar" value="Reiniciar partida">  
+                </div>
+                
+            </div>
+        </section>
+        <div class="cambiarFichas modoDeJuego">
+            <ul class="upload">
+                <li>Cambiar fichas de jugador 1 <input type="file" name="image" id="Ficha1" ></li>
+                <li>Cambiar fichas de jugador 2 <input type="file" name="image" id="Ficha2" ></li>
+            </ul>
+        </div>
     </div>
-
-    <script src="./js/figure.js"></script>
-    <script src="./js/circle.js"></script>
-    <script src="./js/helper.js"></script>
-    <script src="./js/ficha.js"></script>
-    <script src="./js/juego.js"></script>
-    <script src="./js/table.js"></script>
-    <script src="./js/rect.js"></script>
-    <script src="./js/figuraCompuesta.js"></script>
+    
+        <script src="./js/figure.js"></script>
+        <script src="./js/circle.js"></script>
+        <script src="./js/helper.js"></script>
+        <script src="./js/ficha.js"></script>
+        <script src="./js/juego.js"></script>
+        <script src="./js/table.js"></script>
+        <script src="./js/rect.js"></script>
+        <script src="./js/figuraCompuesta.js"></script>
     
 </body>
 

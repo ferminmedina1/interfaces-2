@@ -100,12 +100,23 @@ a{
 
 .btnVolveryTurnos{
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }
 
-#volver{
-    width: 88%;
-    font-size: 105%;
-    padding: 7%;
+.change{
+    margin: 0;
     display: none;
+}
+
+.upload{
+    flex-direction: column;
+    text-decoration: none;
+    margin: 20px;
+}
+
+.cambiarFichas{
+    position: absolute;
+    top: 5%;
+    left: 5%;
 }

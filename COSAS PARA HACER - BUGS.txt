@@ -7,20 +7,15 @@
 
 
 
-
-
 	Bugs y cosas para hacer:
 
-				-·- Verificar que cuando el mouse sale del canvas suelte la ficha y vuelva a su posicion
+	-·- Verificar que cuando el mouse sale del canvas suelte la ficha y vuelva a su posicion
 
-				-·- Cuando se llena una columna, no permitir dejar una ficha en esa columna
+	-·- Cuando se llena una columna, no permitir dejar una ficha en esa columna
 
-				-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro
+	-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro 	//SI SE PUEDE
 
-				-·- A veces hay un bug con el temporizador (probar continuando la partida)
+	-·- Arreglar el h1 donde se indica el turno del jugador cuando se reinicia la partida, tambien 
+	el turno del jugador tiene que ser como si se creara una partida nueva
 
-				-·- Hacer que cuando el tiempo llegue a cero pase algo (se termine la partida)
-
-				-·- Hacer que cuando se aprete en el boton reiniciar partida sea como si se recargara la pagina (juego nuevo).
-
-				-·- Que se pueda cambiar la imagen de la ficha (se pueden imagenes precargadas) (en la carpeta ya estan las fichas)
+	-·- Que se pueda cambiar la imagen de la ficha (se pueden imagenes precargadas) (en la carpeta ya estan las fichas)

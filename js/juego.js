@@ -41,13 +41,24 @@ window.onload = function(){
         drawFigures();
     }
 
+    c.addEventListener("mouseleave", function(e){
+
+            if(lastClickedFigure){
+                lastClickedFigure.setPosition(lostPos.x,lostPos.y);
+                drawFigures();
+            }
+    })
+
+
     // suelta la ficha
     c.onmouseup = function(e){
         isMouseDown = false;
+
         if (lastClickedFigure != null){
             let pos= lastClickedFigure.getPosition();
             let encontro = false;
             for (let i = 0; i < bajadas.length; i++){//REVISA SI SELECCIONO ALGUNA COLUMNA
+
                 if(bajadas[i].isPointInside(pos.x,pos.y)){
                     lastClickedFigure.setPosition(pos.x,pos.y);
                     encontro = true;
@@ -59,11 +70,13 @@ window.onload = function(){
             lastClickedFigure.setPosition(lostPos.x,lostPos.y);
             }
         }
+
         drawFigures();
 
     }
     // mueve la ficha por el canvas
     c.onmousemove = function(e){
+        
         if (isMouseDown && lastClickedFigure != null){
             lastClickedFigure.setPosition(e.layerX,e.layerY);
             drawFigures();

@@ -21,9 +21,13 @@ let fichasJugador = null;
 let tamFicha = null;
 //#endregion
 let juegoIniciado = false;
+let continuaPartida = false;
 let ptsJ1 = 0;
 let ptsJ2 = 0;
 let temporizador;
+let segundos = 0;
+
+let minutos = 0;
 let fichas = [];//Fichas de ambos equipos
 let vecinos = [];//busca iguales al rededor
 let bajadas = [];//sectores de bajada de ficha
@@ -32,19 +36,39 @@ let matrizJuego = [];
 
 crearTablero();
 
+function verificarPTSGanador(){
+
+  if (ptsJ1 > ptsJ2){
+    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 1!!!"
+  }
+  else if (ptsJ2 > ptsJ1) {
+    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 2!!!"
+  }
+  else{
+    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, HUBO EMPATE!!!"
+    juegoGanado = false
+  }
+  
+
+  document.querySelector(".btnContinuarReiniciar").style.display = "flex";
+  document.getElementById("btnReiniciar").style.display = "flex";
+  
+}
 
 function reloj(){  
 
-  let segundos = 60;
-  let minutos = 3;
   let s = document.getElementById("segundos")
   let m = document.getElementById("minutos")
-
+  m.innerHTML = "0"+minutos
 
   temporizador = setInterval(function(){
 
       if(minutos == 0 && segundos == 1){
+        
         clearTimeout(temporizador);
+        verificarPTSGanador() 
+        juegoIniciado = false
+        drawFigures()
       }
 
         if(segundos == 0){
@@ -63,7 +87,7 @@ function reloj(){
           s.innerHTML = segundos
         }
 
-    },1000)
+      },1000)
 }
 
 
@@ -111,56 +135,65 @@ function cargarParametros(){ //calculo los parametros
 function setTablero(){  //setea el tablero
   
   if (!juegoIniciado){
-    
-    let canvas = document.querySelector('#myCanvas');
-    if(modoDeJuego == 4){
-        dimY = 6;
-        dimX = 7
-        cantWin = 4
-        inicX = 290
-    }
 
-    else if (modoDeJuego == 6){
-        dimY = 7;
-        dimX = 8
-        cantWin = 6
-        canvas.height = 600; 
-        canvasHeight = canvas.height
-        inicX = 260;
-    }
+    if(!continuaPartida){
 
-    else if (modoDeJuego == 7){
-        dimY = 8;
-        dimX = 9;
-        cantWin = 7
-        canvas.width = 1100
-        canvas.height = 700;
-        canvasWidth = canvas.width
-        canvasHeight = canvas.height
-        inicX = 290;
-    }
+      let canvas = document.querySelector('#myCanvas');
 
-    else if (modoDeJuego == 8){
-        dimY = 9;
-        dimX = 10
-        cantWin = 8
-        canvas.width = 1100
-        canvas.height = 700; 
-        canvasWidth = canvas.width
-        canvasHeight = canvas.height
-        inicX = 260;
-    }
+      if(modoDeJuego == 4){
+          dimY = 6;
+          dimX = 7
+          cantWin = 4
+          inicX = 290
+          minutos =1;
+      }
 
-    inicY = 80;
-    document.querySelector(".title").innerHTML = modoDeJuego + " en linéa"
-    cargarParametros();
-    dibujarFichas();
+      else if (modoDeJuego == 6){
+          dimY = 7;
+          dimX = 8
+          cantWin = 6
+          canvas.height = 600; 
+          canvasHeight = canvas.height
+          inicX = 260;
+          minutos = 6;
+      }
+
+      else if (modoDeJuego == 7){
+          dimY = 8;
+          dimX = 9;
+          cantWin = 7
+          canvas.width = 1100
+          canvas.height = 700;
+          canvasWidth = canvas.width
+          canvasHeight = canvas.height
+          inicX = 290;
+          minutos = 7;
+      }
+
+      else if (modoDeJuego == 8){
+          dimY = 9;
+          dimX = 10
+          cantWin = 8
+          canvas.width = 1100
+          canvas.height = 700; 
+          canvasWidth = canvas.width
+          canvasHeight = canvas.height
+          inicX = 260;
+          minutos = 8;
+      }
+
+      inicY = 80;
+    }
+      document.querySelector(".title").innerHTML = modoDeJuego + " en linéa"
+      cargarParametros();
+      dibujarFichas();
   }
+    
 }
 
 function dibujarFichas(){
 
-    let initAltura = 160 ;
+    let initAltura = 160;
     let aux = false;
     let limitRojoX = inicX -80;
     let inicAmarilloX = canvasWidth - 210
@@ -182,12 +215,6 @@ function dibujarFichas(){
           inicAmarilloX = canvasWidth - 120
         }
 
-        
-          
-
-          //initAltura = inicY
-          //limitRojoX = inicX -100;
-        
           fichas[i]=addFichaR(limitRojoX,initAltura,colorUno); //creo las fichas rojas
           i++;
           fichas[i]=addFichaA(inicAmarilloX, initAltura, colorDos); //crep las fichas amarillas
@@ -267,6 +294,7 @@ function cargarTablero(){
   /// MODIFICA EL CUADRANTE DEL SECTOR GANADOR
   function cargarGanador(color){
 
+    clearTimeout(temporizador); //se para el reloj
     let ganadorDeRonda;
     if(color == colorUno){
       ptsJ1++;
@@ -285,13 +313,16 @@ function cargarTablero(){
       matrizJuego[vecinos[i].y][vecinos[i].x].getFig1().setFill(colorWin); //remarca el fondo en el cual se logro ganar!
       juegoGanado = true;
       juegoIniciado = false; //aca podriamos hacer que aparezca una imagen para el ganador...
+
     }
 
-    clearTimeout(temporizador); //se para el reloj
-
     document.querySelector(".btnContinuarReiniciar").style.display = "flex";
+    document.getElementById("btnContinuar").style.display = "flex";
+    document.getElementById("btnReiniciar").style.display = "flex";
 
-    document.getElementById("btnContinuar").addEventListener("click", function(){
+    document.getElementById("btnContinuar").addEventListener("click", function(){ //BOTON CONTINUAR
+
+      document.getElementById("btnContinuar").style.display = "none ";
 
       if (ganadorDeRonda == "jugador 1"){
         document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2"
@@ -299,8 +330,12 @@ function cargarTablero(){
       else{
         document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1"
       }
-      reiniciarTablero()  //reinicia el tablero
+
+      continuaPartida = true;
+      clearTimeout(temporizador); //se para el reloj
       reloj() //se inicia el reloj
+      reiniciarTablero()  //reinicia el tablero
+
       document.querySelector(".btnContinuarReiniciar").style.display = "none";
       
     })
@@ -310,10 +345,13 @@ function cargarTablero(){
 
 
   document.getElementById("btnReiniciar").addEventListener("click", function(){
-    
+
+    continuaPartida = false;
     ptsJ1 = 0;
     ptsJ2 = 0;
+    segundos = 0;
     reiniciarTablero()
+    clearTimeout(temporizador); //se para el reloj
     reloj();
     document.querySelector(".btnContinuarReiniciar").style.display = "none";
     
@@ -331,6 +369,7 @@ function cargarTablero(){
     vecinos = [];//busca iguales al rededor
     bajadas = [];//sectores de bajada de ficha
     matrizJuego = [];
+    setTablero();
     juegoIniciado = true;
     juegoGanado = false;
     cargarParametros();
@@ -359,6 +398,7 @@ function cargarTablero(){
 //LOGICA DE JUEGO
 
 function actualizarTablero(columna,ultimaFicha){
+
   let color = ultimaFicha.getFill();
   let dir = ultimaFicha.getDir();
   let pinto = false;

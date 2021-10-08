@@ -41,11 +41,13 @@ window.onload = function(){
         drawFigures();
     }
 
+//cuando sale del canvas si se esta arrastrando una ficha, vuelve a su posicion
     c.addEventListener("mouseleave", function(e){
 
             if(lastClickedFigure){
                 lastClickedFigure.setPosition(lostPos.x,lostPos.y);
                 drawFigures();
+                isMouseDown = false;
             }
     })
 

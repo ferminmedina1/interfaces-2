@@ -9,8 +9,6 @@
 
 	Bugs y cosas para hacer:
 
-	-·- Verificar que cuando el mouse sale del canvas suelte la ficha y vuelva a su posicion
-
 	-·- Cuando se llena una columna, no permitir dejar una ficha en esa columna
 
 	-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro 	//SI SE PUEDE

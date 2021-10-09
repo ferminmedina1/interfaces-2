@@ -11,9 +11,7 @@ header{
     display: flex;
 }
 
-div > p {
-    margin-bottom: 4%;
-}
+
 p{
     margin-top: 0;
 }

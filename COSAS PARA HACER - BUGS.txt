@@ -1,9 +1,7 @@
 
 	Bugs y cosas para hacer:
 
-	-·- Cuando se llena una columna, no permitir dejar una ficha en esa columna
 
 	-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro 	//SI SE PUEDE
 
-	-·- Arreglar el h1 donde se indica el turno del jugador cuando se reinicia la partida, tambien 
-	el turno del jugador tiene que ser como si se creara una partida nueva
+	-·- Cuando se reinicia la partida tratar de q el turno sea aleatorio //si se puede, arreglar

@@ -24,7 +24,7 @@
     display: none;
     justify-content: center;
     margin: 0;
-    margin-right: 10%;
+    margin-right: 6%;
 }
 
 table{
@@ -105,7 +105,7 @@ a{
 }
 
 .change{
-    margin: 0;
+
     display: none;
 }
 
@@ -119,4 +119,21 @@ a{
     position: absolute;
     top: 5%;
     left: 5%;
+}
+
+
+
+#imgFichaJ2{
+    top: 425%;
+    position: absolute;
+    left: 1394%;
+    list-style: none;
+}
+
+
+
+#imgFichaJ1{
+    top: 425%;
+    position: absolute;
+    list-style: none;
 }

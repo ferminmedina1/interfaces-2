@@ -1,3 +1,5 @@
+//se inicializan los parametros
+
 let inicX;
 let inicY;
 let dimX;
@@ -22,70 +24,74 @@ let ptsJ1 = 0;
 let ptsJ2 = 0;
 let temporizador;
 let segundos = 0;
-
 let minutos = 0;
-let fichas = [];//Fichas de ambos equipos
-let vecinos = [];//busca iguales al rededor
-let bajadas = [];//sectores de bajada de ficha
-//guardo el Tablero
-let matrizJuego = [];
+let fichas = [];  //Fichas de ambos equipos
+let vecinos = []; //busca iguales al rededor
+let bajadas = []; //sectores de bajada de ficha
+let matrizJuego = []; //guardo el Tablero
 
 crearTablero();
 
-function verificarPTSGanador(){
+//funcion que verifica quien tiene mayor puntaje
 
-  if (ptsJ1 > ptsJ2){
-    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 1!!!"
+  function verificarPTSGanador(){
+
+    if (ptsJ1 > ptsJ2){
+      document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 1!!!"
+    }
+    else if (ptsJ2 > ptsJ1) {
+      document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 2!!!"
+    }
+    else{
+      document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, HUBO EMPATE!!!"
+      juegoGanado = false
+    }
+    
+
+    document.querySelector(".btnContinuarReiniciar").style.display = "flex";
+    document.getElementById("btnReiniciar").style.display = "flex";
+    
   }
-  else if (ptsJ2 > ptsJ1) {
-    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, GANO EL JUGADOR 2!!!"
-  }
-  else{
-    document.querySelector(".turnos").innerHTML = "SE ACABO EL TIEMPO, HUBO EMPATE!!!"
-    juegoGanado = false
-  }
-  
 
-  document.querySelector(".btnContinuarReiniciar").style.display = "flex";
-  document.getElementById("btnReiniciar").style.display = "flex";
-  
-}
+//funcion de temporizador, cuando llega cero termina la partida
 
-function reloj(){  
+  function reloj(){  
 
-  let s = document.getElementById("segundos")
-  let m = document.getElementById("minutos")
-  m.innerHTML = "0"+minutos
+    let s = document.getElementById("segundos")
+    let m = document.getElementById("minutos")
+    m.innerHTML = "0"+minutos
 
-  temporizador = setInterval(function(){
+    temporizador = setInterval(function(){
 
-      if(minutos == 0 && segundos == 1){
-        
-        clearTimeout(temporizador);
-        verificarPTSGanador() 
-        juegoIniciado = false
-        drawFigures()
-      }
-
-        if(segundos == 0){
-          segundos = 60;
-          minutos--;
-          m.innerHTML = "0"+minutos
+        if(minutos == 0 && segundos == 1){
           
-        }
-        
-        segundos--
-
-        if(segundos <10){
-          s.innerHTML = "0"+segundos
-        }
-        else{
-          s.innerHTML = segundos
+          clearTimeout(temporizador);
+          verificarPTSGanador() 
+          juegoIniciado = false
+          drawFigures()
         }
 
-      },1000)
-}
+          if(segundos == 0){
+            segundos = 60;
+            minutos--;
+            m.innerHTML = "0"+minutos
+            
+          }
+          
+          segundos--
 
+          if(segundos <10){
+            s.innerHTML = "0"+segundos
+          }
+          else{
+            s.innerHTML = segundos
+          }
+
+        },1000)
+  }
+
+
+//A partir de esta funcion se crea el tablero
 
  function crearTablero(){
 
@@ -121,77 +127,74 @@ function reloj(){
 }
 
 
-cargarParametros();
+//se cargan los parametros de las fichas
 
-//****************FIN SECUENCIAL *************/
-
-function cargarParametros(){ //calculo los parametros
-  fichasJugador = dimX * dimY;
-  tamFicha = (tabWidth/2) -7;
-}
-
-//#region NIVELES DE JUEGO
-
-
-function setTablero(){  //setea el tablero
-  
-  if (!juegoIniciado){
-
-    if(!continuaPartida){
-
-      let canvas = document.querySelector('#myCanvas');
-
-      if(modoDeJuego == 4){
-          dimY = 6;
-          dimX = 7
-          cantWin = 4
-          inicX = 290
-          minutos = 4;
-      }
-
-      else if (modoDeJuego == 6){
-          dimY = 7;
-          dimX = 8
-          cantWin = 6
-          canvas.height = 600; 
-          canvasHeight = canvas.height
-          inicX = 260;
-          minutos = 6;
-      }
-
-      else if (modoDeJuego == 7){
-          dimY = 8;
-          dimX = 9;
-          cantWin = 7
-          canvas.width = 1100
-          canvas.height = 700;
-          canvasWidth = canvas.width
-          canvasHeight = canvas.height
-          inicX = 290;
-          minutos = 7;
-      }
-
-      else if (modoDeJuego == 8){
-          dimY = 9;
-          dimX = 10
-          cantWin = 8
-          canvas.width = 1100
-          canvas.height = 700; 
-          canvasWidth = canvas.width
-          canvasHeight = canvas.height
-          inicX = 260;
-          minutos = 8;
-      }
-
-      inicY = 80;
-    }
-      document.querySelector(".title").innerHTML = modoDeJuego + " en linéa"
-      cargarParametros();
-      dibujarFichas();
+  function cargarParametros(){ 
+    fichasJugador = dimX * dimY;
+    tamFicha = (tabWidth/2) -7;
   }
-    
-}
 
+//se setean los valores del tablero segun el modo de juego
+
+  function setTablero(){ 
+    
+    if (!juegoIniciado){
+
+      if(!continuaPartida){
+
+        let canvas = document.querySelector('#myCanvas');
+
+        if(modoDeJuego == 4){
+            dimY = 6;
+            dimX = 7
+            cantWin = 4
+            inicX = 290
+            minutos = 4;
+        }
+
+        else if (modoDeJuego == 6){
+            dimY = 7;
+            dimX = 8
+            cantWin = 6
+            canvas.height = 600; 
+            canvasHeight = canvas.height
+            inicX = 260;
+            minutos = 6;
+        }
+
+        else if (modoDeJuego == 7){
+            dimY = 8;
+            dimX = 9;
+            cantWin = 7
+            canvas.width = 1100
+            canvas.height = 700;
+            canvasWidth = canvas.width
+            canvasHeight = canvas.height
+            inicX = 290;
+            minutos = 7;
+        }
+
+        else if (modoDeJuego == 8){
+            dimY = 9;
+            dimX = 10
+            cantWin = 8
+            canvas.width = 1100
+            canvas.height = 700; 
+            canvasWidth = canvas.width
+            canvasHeight = canvas.height
+            inicX = 260;
+            minutos = 8;
+        }
+
+        inicY = 80;
+      }
+        document.querySelector(".title").innerHTML = modoDeJuego + " en linéa"
+        cargarParametros();
+    }
+      
+  }
+
+//funcion para determinar la posicion de las fichas las fichas y luego crearlas
 function dibujarFichas(){
 
     let initAltura = 160;
@@ -226,9 +229,46 @@ function dibujarFichas(){
     drawFigures();
 }
 
-let imgInput = document.getElementById('Ficha1');
-   
-imgInput.addEventListener('change', function(e) {
+
+
+//se dibujan las fichas
+
+function drawFigures(){
+  clearCanvasImg(ctx,imgFondo);
+  dibujarTablero();
+  if (juegoIniciado){
+    for (let i=0; i < fichas.length; i++){
+      fichas[i].draw(); //se dibujan las fichas
+    }
+  }
+}
+
+
+//aca lo que hacemos es obtener el valor de la imagen de la ficha del jugador 1, si es que se quiere cambiar
+
+  let imgInput = document.getElementById('Ficha1');
+    
+  imgInput.addEventListener('change', function(e) {
+      if(e.target.files) {
+          let imageFile = e.target.files[0];  //aca obtenemos el archivo
+          let reader = new FileReader();
+          reader.readAsDataURL(imageFile);
+          reader.onloadend = function (e) {
+              let myImage = new Image();      //crea la imagen
+              myImage.src = e.target.result; 
+              myImage.onload = function() {
+                fichaImg1 = myImage.src;
+        }
+        }
+      }
+  });
+
+
+//aca lo que hacemos es obtener el valor de la imagen de la ficha del jugador 2, si es que se quiere cambiar
+
+  let imgInput2 = document.getElementById('Ficha2');
+
+  imgInput2.addEventListener('change', function(e) {
     if(e.target.files) {
         let imageFile = e.target.files[0];  //aca obtenemos el archivo
         let reader = new FileReader();
@@ -237,53 +277,43 @@ imgInput.addEventListener('change', function(e) {
             let myImage = new Image();      //crea la imagen
             myImage.src = e.target.result; 
             myImage.onload = function() {
-              fichaImg1 = myImage.src;
+              fichaImg2 = myImage.src;
       }
       }
     }
-});
+  });
 
-let imgInput2 = document.getElementById('Ficha2');
+//se crean las fichas del jugador 1
 
-imgInput2.addEventListener('change', function(e) {
-  if(e.target.files) {
-      let imageFile = e.target.files[0];  //aca obtenemos el archivo
-      let reader = new FileReader();
-      reader.readAsDataURL(imageFile);
-      reader.onloadend = function (e) {
-          let myImage = new Image();      //crea la imagen
-          myImage.src = e.target.result; 
-          myImage.onload = function() {
-            fichaImg2 = myImage.src;
+  function addFichaR(X,Y,color){ 
+    let posX =  X
+    let posY = Y 
+    let radio = tamFicha;
+    if(fichaImg1 == null){
+        fichaImg1= "img/ficha_roja.png";
     }
+    let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg1); //Creamos el objeto ficha con sus respectivos parametros y lo retornamos
+    return ficha;
+  }
+
+//se crean las fichas del jugador 2
+
+  function addFichaA(X,Y,color){
+    let posX = X; 
+    let posY = Y 
+    let radio = tamFicha;
+    if(fichaImg2 == null){
+      fichaImg2= "img/ficha_amarilla.png";
     }
+    let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg2);
+    return ficha;
   }
-});
-
-function addFichaR(X,Y,color){ //podriamos agregar un parametro para cargar una imagen...
-  let posX =  X//Math.round(Math.random() * X);
-  let posY = Y //+ Math.round(Math.random() * (canvasHeight - Y)); //se crea aleatoriamente en el canvas
-  let radio = tamFicha;
-  if(fichaImg1 == null){
-      fichaImg1= "img/ficha_roja.png";
-  }
-  let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg1); //Creamos el objeto ficha con sus respectivos parametros y lo retornamos
-  return ficha;
-}
-
-function addFichaA(X,Y,color){
-  let posX = X; //se crea pero del otro lado!
-  let posY = Y //+ Math.round(Math.random() * (canvasHeight - Y));
-  let radio = tamFicha;
-  if(fichaImg2 == null){
-    fichaImg2= "img/ficha_amarilla.png";
-  }
-  let ficha = new Ficha(posX,posY,color,radio,ctx,fichaImg2);
-  return ficha;
-}
 
 
-function cargarTablero(){
+//se carga el tablero
+
+  function cargarTablero(){
+
     let posX = inicX;
     let posY = inicY;
     let ancho = tabWidth;
@@ -294,8 +324,8 @@ function cargarTablero(){
         for(let j = 0; j < dimX; j++){
             let rect = new Rect(posX,posY,color,ctx,ancho,alto); //creamos el tablero
             let dir = "img/ficha_blanca.png";
-            let circ = new Ficha(posX+(ancho/2),posY+(alto/2),fillCirc,(ancho/2)-10,ctx,dir); //creamos las falsas fichas para el tablero
-            //guardo el estado de casillero, arranca en blanco
+            let circ = new Ficha(posX+(ancho/2),posY+(alto/2),fillCirc,(ancho/2)-10,ctx,dir); //creamos las falsas fichas para el tablero (posiciones en blanco)
+            //guarda el estado de casillero, arranca en blanco
             let compuesto = new FigCompuesta(rect,circ); //para poder obtener la informacion del objeto se crea la clase!
             matrizJuego[i][j] = compuesto;
             posX+=ancho;
@@ -306,8 +336,9 @@ function cargarTablero(){
   }
 
 
+//se cargan las flechas que aparecen arriba del tablero
 
-  function cargarBajadas(){ //creo las flechas de entrada!
+  function cargarBajadas(){ 
     let posY = inicY - tamFicha;
     let posX = inicX + (tabWidth/2);
     let radio = tamFicha;
@@ -319,7 +350,19 @@ function cargarTablero(){
     }
   }
 
-  function dibujarTablero(){ //simplemente se dibuja el tablero!
+
+//se dibujan las flechas
+
+  function dibujarBajadas(){
+    for(let i = 0; i < dimX; i++){
+      bajadas[i].draw(); //se dibujan las bajadas
+    }
+  }
+
+
+//funcion para dibujar el tablero
+
+  function dibujarTablero(){ 
     dibujarBajadas();
     for(let i=0; i < dimY; i++){
       for(let j=0; j < dimX; j++){
@@ -330,11 +373,79 @@ function cargarTablero(){
   }
 
 
-  /// MODIFICA EL CUADRANTE DEL SECTOR GANADOR
+  //LOGICA DE JUEGO
+
+  function actualizarTablero(columna,ultimaFicha){
+
+    let color = ultimaFicha.getFill();
+    let dir = ultimaFicha.getDir();
+    let pinto = false;
+    for(let fila = (dimY - 1); fila >= 0; fila--){
+      if ((matrizJuego[fila][columna].getFig2().getFill() == fillCirc) && !pinto ){
+        matrizJuego[fila][columna].getFig2().setFill(color);
+        matrizJuego[fila][columna].getFig2().setDir(dir);
+        pinto = true;
+        ultimoColor = ultimaFicha.getFill(); //busca en la matriz el lugar donde sera colocada la ficha y la coloca!
+        ultimaFicha.setNull();
+        juegoGanado = buscaGanador(columna,fila);  //busca si el jugador logro ganar
+      } 
+    }
+  }
+
+
+  //VERIFICA SI GANO EL ULTIMO EN AGREGAR
+
+  function buscaGanador(posX,posY){
+    
+    vecinos = [];
+    let enLinea = false;
+    let color = matrizJuego[posY][posX].getFig2().getFill();
+    
+    if(color == colorDos)
+
+      document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1";
+      else{
+          document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2";
+      }
+
+    enLinea = buscaRectaY(posX,posY,color); //busca si hay una recta como para declarar un ganador
+
+    if(enLinea){
+      cargarGanador(color);
+      return true;
+    }
+    else{ //busco en otras posibles posicones
+      enLinea = buscaRectaX(posX,posY,color);
+      if (enLinea){
+        cargarGanador(color);
+        return true;
+      }
+      else {
+        enLinea = buscaDiagonalI(posX,posY,color);
+        if (enLinea){
+          cargarGanador(color);
+          return true;
+        }
+        else {
+          enLinea = buscaDiagonalD(posX,posY,color);
+          if (enLinea){
+            cargarGanador(color);
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+
+  //cuando finaliza la partida marca la posicion ganadora y se avisa quien gano
+
   function cargarGanador(color){
 
     clearTimeout(temporizador); //se para el reloj
     let ganadorDeRonda;
+    
     if(color == colorUno){
       ptsJ1++;
       document.getElementById("player1").innerHTML = ptsJ1
@@ -349,9 +460,10 @@ function cargarTablero(){
     }
 
     for(let i = 0; i < vecinos.length ; i++){
+
       matrizJuego[vecinos[i].y][vecinos[i].x].getFig1().setFill(colorWin); //remarca el fondo en el cual se logro ganar!
       juegoGanado = true;
-      juegoIniciado = false; //aca podriamos hacer que aparezca una imagen para el ganador...
+      juegoIniciado = false; 
 
     }
 
@@ -359,16 +471,14 @@ function cargarTablero(){
     document.getElementById("btnContinuar").style.display = "flex";
     document.getElementById("btnReiniciar").style.display = "flex";
 
-    document.getElementById("btnContinuar").addEventListener("click", function(){ //BOTON CONTINUAR
+
+//BOTON CONTINUAR
+
+    document.getElementById("btnContinuar").addEventListener("click", function(){ 
 
       document.getElementById("btnContinuar").style.display = "none ";
 
-      if (ganadorDeRonda == "jugador 1"){
-        document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2"
-      }
-      else{
-        document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1"
-      }
+      avisoJugadorSig(ganadorDeRonda)
 
       continuaPartida = true;
       clearTimeout(temporizador); //se para el reloj
@@ -380,11 +490,11 @@ function cargarTablero(){
     })
 
 
-  }
+//BOTON REINICIAR PARTIDA
 
+  document.getElementById("btnReiniciar").addEventListener("click", function(){ 
 
-  document.getElementById("btnReiniciar").addEventListener("click", function(){
-
+    avisoJugadorSig(ganadorDeRonda)
     continuaPartida = false;
     ptsJ1 = 0;
     ptsJ2 = 0;
@@ -396,9 +506,24 @@ function cargarTablero(){
     
   })
 
+  }
+
+  function avisoJugadorSig(ganadorDeRonda){
+
+    
+    if (ganadorDeRonda == "jugador 1"){
+      document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2"
+    }
+    else{
+      document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1"
+    }
+  }
+
+
+//FUNCION PARA REINICIAR LA PARTIDA
 
   function reiniciarTablero(){
-
+    
     fichasJugador = null;
     tamFicha = null;
     juegoIniciado = false;
@@ -415,254 +540,185 @@ function cargarTablero(){
     dibujarFichas();
 
   }
-  
-
-  function dibujarBajadas(){
-    for(let i = 0; i < dimX; i++){
-      bajadas[i].draw(); //se dibujan las bajadas
-    }
-  }
 
 
-  function drawFigures(){
-    clearCanvasImg(ctx,imgFondo);
-    dibujarTablero();
-    if (juegoIniciado){
-      for (let i=0; i < fichas.length; i++){
-        fichas[i].draw(); //se dibujan las fichas
-      }
-    }
-}
+//busca ganador en Y
 
-//LOGICA DE JUEGO
-
-function actualizarTablero(columna,ultimaFicha){
-
-  let color = ultimaFicha.getFill();
-  let dir = ultimaFicha.getDir();
-  let pinto = false;
-  for(let fila = (dimY - 1); fila >= 0; fila--){
-    if ((matrizJuego[fila][columna].getFig2().getFill() == fillCirc) && !pinto ){
-      matrizJuego[fila][columna].getFig2().setFill(color);
-      matrizJuego[fila][columna].getFig2().setDir(dir);
-      pinto = true;
-      ultimoColor = ultimaFicha.getFill(); //busca en la matriz el lugar donde sera colocada la ficha y la coloca!
-      ultimaFicha.setNull();
-      juegoGanado = buscaGanador(columna,fila);  //busca si el jugador logro ganar
-    } 
-  }
-}
-
-//#region VERIFICA SI GANO EL ULTIMO EN AGREGAR
-//pos x=columna, posY = i
-function buscaGanador(posX,posY){
-
-  vecinos = [];
-  let enLinea = false;
-  let color = matrizJuego[posY][posX].getFig2().getFill();
-  
-  if(color == colorDos)
-    document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1";
-    else{
-        document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2";
-    }
-  enLinea = buscaRectaY(posX,posY,color); //busca si hay una recta como para declarar un ganador
-  if(enLinea){
-    cargarGanador(color);
-    return true;
-  }
-  else{ //busco en otras posibles posicones
-    enLinea = buscaRectaX(posX,posY,color);
-    if (enLinea){
-      cargarGanador(color);
-      return true;
-    }
-    else {
-      enLinea = buscaDiagonalI(posX,posY,color);
-      if (enLinea){
-        cargarGanador(color);
+  function buscaRectaY(posX,posY,color){
+    let suma = 0;
+    suma = recursivoAbajo(posX,posY+1,color) + 1;
+    if(suma >= cantWin){
+      vecinos.push({ 
+        "x": posX,
+        "y": posY,}); 
         return true;
+    }
+    vecinos = [];
+    return false;
+  }
+
+
+  function recursivoAbajo(posX,posY,color){
+    let suma = 0;
+    if (posY < dimY){
+      
+      let colorActual = matrizJuego[posY][posX].getFig2().getFill();
+      if (colorActual == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAbajo(posX,posY+1,color);
+        return (suma + 1);
       }
-      else {
-        enLinea = buscaDiagonalD(posX,posY,color);
-        if (enLinea){
-          cargarGanador(color);
-          return true;
-        }
-      }
     }
+    return 0;
   }
-  return false;
-}
 
-//#region busca ganador en Y
-function buscaRectaY(posX,posY,color){
-  let suma = 0;
-  suma = recursivoAbajo(posX,posY+1,color) + 1;
-  if(suma >= cantWin){
-    vecinos.push({ 
-      "x": posX,
-      "y": posY,}); 
-      return true;
-  }
-  vecinos = [];
-  return false;
-}
 
-function recursivoAbajo(posX,posY,color){
-  let suma = 0;
-  if (posY < dimY){
-    
-    let colorActual = matrizJuego[posY][posX].getFig2().getFill();
-    if (colorActual == color){
-      vecinos.push({ 
-        "x": posX,
-        "y": posY,});
-      suma+= recursivoAbajo(posX,posY+1,color);
-      return (suma + 1);
-    }
-  }
-  return 0;
-}
-//#endregion
+//busca Ganador en X
 
-//#region busca Ganador en X
-function buscaRectaX(posX,posY,color){
-  let suma = 0;
-  suma = recursivoAtras(posX-1,posY,color) + 1;
-  if (suma < cantWin){
-    suma+= recursivoAdelante(posX+1,posY,color);
-  }
-  if(suma >= cantWin){
-    vecinos.push({ 
-      "x": posX,
-      "y": posY,});
-      return true;
-  }
-  vecinos = [];
-  return false;
-}
-
-function recursivoAtras(posX, posY, color){
-  let suma = 0;
-  if (posX >= 0){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
-      vecinos.push({ 
-        "x": posX,
-        "y": posY,});
-      suma+= recursivoAtras(posX-1,posY, color);
-      return (suma + 1);
-    }
-  }
-  return 0;
-}
-
-function recursivoAdelante(posX,posY,color){
-  let suma = 0;
-  if (posX < dimX){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
-      vecinos.push({ 
-        "x": posX,
-        "y": posY,});
+  function buscaRectaX(posX,posY,color){
+    let suma = 0;
+    suma = recursivoAtras(posX-1,posY,color) + 1;
+    if (suma < cantWin){
       suma+= recursivoAdelante(posX+1,posY,color);
-      return (suma + 1);
     }
-  }
-  return 0;
-}
-//#endregion
-
-//#region busca ganador en diagonal Izquierda
-function buscaDiagonalI(posX,posY,color){
-  let suma = 0;
-  suma = recursivoAtrasI(posX+1,posY-1,color) + 1;
-  if (suma < cantWin){
-    suma+= recursivoAdelanteI(posX-1,posY+1,color);
-  }
-  if(suma >= cantWin){
-    vecinos.push({ 
-      "x": posX,
-      "y": posY,});
-      return true;
-  }
-  vecinos = [];
-  return false;
-}
-
-function recursivoAtrasI(posX, posY, color){
-  let suma = 0;
-  if (posY >= 0 && posX < dimX){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
+    if(suma >= cantWin){
       vecinos.push({ 
         "x": posX,
         "y": posY,});
-      suma+= recursivoAtrasI(posX+1,posY-1,color);
-      return (suma + 1);
+        return true;
     }
+    vecinos = [];
+    return false;
   }
-  return 0;
-}
 
-function recursivoAdelanteI(posX, posY, color){
-  let suma = 0;
-  if (posX >= 0 && posY < dimY){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
-      vecinos.push({ 
-        "x": posX,
-        "y": posY,});
+
+  function recursivoAtras(posX, posY, color){
+    let suma = 0;
+    if (posX >= 0){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAtras(posX-1,posY, color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }
+
+
+  function recursivoAdelante(posX,posY,color){
+    let suma = 0;
+    if (posX < dimX){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAdelante(posX+1,posY,color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }
+
+
+//busca ganador en diagonal Izquierda
+
+  function buscaDiagonalI(posX,posY,color){
+    let suma = 0;
+    suma = recursivoAtrasI(posX+1,posY-1,color) + 1;
+    if (suma < cantWin){
       suma+= recursivoAdelanteI(posX-1,posY+1,color);
-      return (suma + 1);
     }
-  }
-  return 0;
-}
-
-//#endregion
-
-//#region busca ganador en diagonal Derecha
-
-function buscaDiagonalD(posX,posY,color){
-  let suma = 0;
-  suma = recursivoAtrasD(posX-1,posY-1,color) + 1;
-  if (suma < cantWin){
-    suma+= recursivoAdelanteD(posX+1,posY+1,color);
-  }
-  if(suma >= cantWin){
-    vecinos.push({ 
-      "x": posX,
-      "y": posY,});
-      return true;
-  }
-  vecinos = [];
-  return false;
-}
-
-function recursivoAdelanteD(posX,posY,color){
-  let suma = 0;
-  if (posX < dimX && posY < dimY){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
+    if(suma >= cantWin){
       vecinos.push({ 
         "x": posX,
         "y": posY,});
+        return true;
+    }
+    vecinos = [];
+    return false;
+  }
+
+
+  function recursivoAtrasI(posX, posY, color){
+    let suma = 0;
+    if (posY >= 0 && posX < dimX){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAtrasI(posX+1,posY-1,color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }
+
+
+  function recursivoAdelanteI(posX, posY, color){
+    let suma = 0;
+    if (posX >= 0 && posY < dimY){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAdelanteI(posX-1,posY+1,color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }
+
+
+
+//busca ganador en diagonal Derecha
+
+
+  function buscaDiagonalD(posX,posY,color){
+    let suma = 0;
+    suma = recursivoAtrasD(posX-1,posY-1,color) + 1;
+    if (suma < cantWin){
       suma+= recursivoAdelanteD(posX+1,posY+1,color);
-      return (suma + 1);
     }
-  }
-  return 0;
-}
-
-function recursivoAtrasD(posX,posY,color){
-  let suma = 0;
-  if (posX >= 0 && posY >= 0){
-    if (matrizJuego[posY][posX].getFig2().getFill() == color){
+    if(suma >= cantWin){
       vecinos.push({ 
         "x": posX,
         "y": posY,});
-      suma+= recursivoAtrasD(posX-1,posY-1,color);
-      return (suma + 1);
+        return true;
     }
+    vecinos = [];
+    return false;
   }
-  return 0;
-}
 
 
+  function recursivoAdelanteD(posX,posY,color){
+    let suma = 0;
+    if (posX < dimX && posY < dimY){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAdelanteD(posX+1,posY+1,color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }
+
+
+  function recursivoAtrasD(posX,posY,color){
+    let suma = 0;
+    if (posX >= 0 && posY >= 0){
+      if (matrizJuego[posY][posX].getFig2().getFill() == color){
+        vecinos.push({ 
+          "x": posX,
+          "y": posY,});
+        suma+= recursivoAtrasD(posX-1,posY-1,color);
+        return (suma + 1);
+      }
+    }
+    return 0;
+  }

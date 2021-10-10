@@ -1,5 +1,0 @@
-
-	Bugs y cosas para hacer:
-
-
-	-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro 	//SI SE PUEDE

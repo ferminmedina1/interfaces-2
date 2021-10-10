@@ -12,7 +12,6 @@ let fillCirc = "white";
 let colorUno = "ROJO";
 let colorDos = "AMARILLO";
 let colorWin = "#a5dbec";
-let ultimoColor = colorDos;
 let modoDeJuego;
 let fichasJugador = null;
 let tamFicha = null;
@@ -29,6 +28,12 @@ let fichas = [];  //Fichas de ambos equipos
 let vecinos = []; //busca iguales al rededor
 let bajadas = []; //sectores de bajada de ficha
 let matrizJuego = []; //guardo el Tablero
+
+let ultimoColor = colorUno;
+let whoPlayFirst = getRandomInt(2);
+if(whoPlayFirst == 0){
+  ultimoColor = colorDos;
+}
 
 crearTablero();
 
@@ -122,6 +127,7 @@ crearTablero();
             reloj()
             document.getElementById("player1img").src = fichaImg1;
             document.getElementById("player2img").src = fichaImg2;
+            avisoJugadorSig(ultimoColor)
         })
     }
 }
@@ -376,7 +382,6 @@ function drawFigures(){
   //LOGICA DE JUEGO
 
   function actualizarTablero(columna,ultimaFicha){
-
     let color = ultimaFicha.getFill();
     let dir = ultimaFicha.getDir();
     let pinto = false;
@@ -400,13 +405,6 @@ function drawFigures(){
     vecinos = [];
     let enLinea = false;
     let color = matrizJuego[posY][posX].getFig2().getFill();
-    
-    if(color == colorDos)
-
-      document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1";
-      else{
-          document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2";
-      }
 
     enLinea = buscaRectaY(posX,posY,color); //busca si hay una recta como para declarar un ganador
 
@@ -435,6 +433,7 @@ function drawFigures(){
         }
       }
     }
+    avisoJugadorSig(ultimoColor);
     return false;
   }
 
@@ -450,27 +449,24 @@ function drawFigures(){
       ptsJ1++;
       document.getElementById("player1").innerHTML = ptsJ1
       document.querySelector(".turnos").innerHTML = "GANO EL JUGADOR 1!!!"
-      ganadorDeRonda = "jugador 1"
+      ganadorDeRonda = "ROJO"
     }
     else{
       ptsJ2++;
       document.getElementById("player2").innerHTML = ptsJ2
       document.querySelector(".turnos").innerHTML = "GANO EL JUGADOR 2!!!"
-      ganadorDeRonda = "jugador 2"
+      ganadorDeRonda = "AMARILLO"
     }
-
     for(let i = 0; i < vecinos.length ; i++){
 
       matrizJuego[vecinos[i].y][vecinos[i].x].getFig1().setFill(colorWin); //remarca el fondo en el cual se logro ganar!
       juegoGanado = true;
       juegoIniciado = false; 
-
     }
 
     document.querySelector(".btnContinuarReiniciar").style.display = "flex";
     document.getElementById("btnContinuar").style.display = "flex";
     document.getElementById("btnReiniciar").style.display = "flex";
-
 
 //BOTON CONTINUAR
 
@@ -493,8 +489,7 @@ function drawFigures(){
 //BOTON REINICIAR PARTIDA
 
   document.getElementById("btnReiniciar").addEventListener("click", function(){ 
-
-    avisoJugadorSig(ganadorDeRonda)
+    avisoJugadorSig(ultimoColor)
     continuaPartida = false;
     ptsJ1 = 0;
     ptsJ2 = 0;
@@ -508,14 +503,13 @@ function drawFigures(){
 
   }
 
-  function avisoJugadorSig(ganadorDeRonda){
-
-    
-    if (ganadorDeRonda == "jugador 1"){
+  function avisoJugadorSig(jugador){
+    if (jugador == "ROJO"){
       document.querySelector(".turnos").innerHTML = "Es el turno del jugador 2"
     }
     else{
       document.querySelector(".turnos").innerHTML = "Es el turno del jugador 1"
+      ultimoColor = "AMARILLO";
     }
   }
 
@@ -721,4 +715,8 @@ function drawFigures(){
       }
     }
     return 0;
+  }
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }

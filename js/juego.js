@@ -66,8 +66,6 @@ window.onload = function(){
         isMouseDown = false;
 
         if (lastClickedFigure != null){
-
-            console.log(lastClickedFigure)
             let pos= lastClickedFigure.getPosition();
             let encontro = false;
 

@@ -3,5 +3,3 @@
 
 
 	-·- A veces cuando se selecciona el modo de juego y se carga el tablero, este aparece en negro 	//SI SE PUEDE
-
-	-·- Cuando se reinicia la partida tratar de q el turno sea aleatorio //si se puede, arreglar
